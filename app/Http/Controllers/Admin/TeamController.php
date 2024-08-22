@@ -28,14 +28,13 @@ class TeamController extends Controller
 
         $users = User::pluck('name', 'id');
 
-        $supervisors = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        return view('admin.teams.create', compact('supervisors', 'users'));
+        return view('admin.teams.create', compact('users'));
     }
 
     public function store(StoreTeamRequest $request)
     {
-        $team = Team::create($request->all());
+        $supervisor = auth()->user()->id;
+        $team = Team::create(array_merge($request->all(), ['supervisor_id' => $supervisor]));
         $team->users()->sync($request->input('users', []));
 
         return redirect()->route('admin.teams.index');

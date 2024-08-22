@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use DateTimeInterface;
@@ -61,9 +62,9 @@ class Project extends Model
             if ($user) {
                 $builder->where(function ($query) use ($user) {
                     $query->where('supervisor_id', $user->id)
-                          ->orWhereHas('team.users', function ($q) use ($user) {  // Corrected this line
-                              $q->where('users.id', $user->id);
-                          });
+                        ->orWhereHas('team.users', function ($q) use ($user) {  // Corrected this line
+                            $q->where('users.id', $user->id);
+                        });
                 });
             }
         });

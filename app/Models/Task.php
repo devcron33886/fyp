@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use DateTimeInterface;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Builder;
 
 class Task extends Model
 {
@@ -64,6 +65,11 @@ class Task extends Model
         return $this->belongsTo(User::class, 'supervisor_id');
     }
 
+    public function taskSubmissions(): HasMany
+    {
+        return $this->hasMany(TaskSubmission::class);
+    }
+
     protected static function booted(): void
     {
         static::addGlobalScope('my-task', function (Builder $builder) {
@@ -72,9 +78,9 @@ class Task extends Model
             if ($user) {
                 $builder->where(function ($query) use ($user) {
                     $query->where('supervisor_id', $user->id)
-                          ->orWhereHas('team.users', function ($q) use ($user) {  // Corrected this line
-                              $q->where('users.id', $user->id);
-                          });
+                        ->orWhereHas('team.users', function ($q) use ($user) {  // Corrected this line
+                            $q->where('users.id', $user->id);
+                        });
                 });
             }
         });

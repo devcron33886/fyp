@@ -31,22 +31,6 @@
                     <span class="help-block">{{ trans('cruds.project.fields.description_helper') }}</span>
                 </div>
                 <div class="form-group">
-                    <label class="required" for="supervisor_id">{{ trans('cruds.project.fields.supervisor') }}</label>
-                    <select class="form-control select2 {{ $errors->has('supervisor') ? 'is-invalid' : '' }}"
-                        name="supervisor_id" id="supervisor_id" required>
-                        @foreach ($supervisors as $id => $entry)
-                            <option value="{{ $id }}" {{ old('supervisor_id') == $id ? 'selected' : '' }}>
-                                {{ $entry }}</option>
-                        @endforeach
-                    </select>
-                    @if ($errors->has('supervisor'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('supervisor') }}
-                        </div>
-                    @endif
-                    <span class="help-block">{{ trans('cruds.project.fields.supervisor_helper') }}</span>
-                </div>
-                <div class="form-group">
                     <label>{{ trans('cruds.project.fields.status') }}</label>
                     <select class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status"
                         id="status">

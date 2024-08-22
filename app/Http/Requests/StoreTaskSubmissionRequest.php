@@ -23,10 +23,7 @@ class StoreTaskSubmissionRequest extends FormRequest
                 'string',
                 'required',
             ],
-            'submitted_by_id' => [
-                'required',
-                'integer',
-            ],
+
         ];
     }
 }

@@ -10,6 +10,7 @@ use App\Models\Task;
 use App\Models\TaskSubmission;
 use App\Models\User;
 use Gate;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class TaskSubmissionController extends Controller
@@ -29,14 +30,14 @@ class TaskSubmissionController extends Controller
 
         $tasks = Task::pluck('title', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $submitted_bies = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        return view('admin.taskSubmissions.create', compact('submitted_bies', 'tasks'));
+        return view('admin.taskSubmissions.create', compact('tasks'));
     }
 
     public function store(StoreTaskSubmissionRequest $request)
     {
-        $taskSubmission = TaskSubmission::create($request->all());
+        $user = Auth::user();
+        $submitted_by = auth()->user()->id;
+        $taskSubmission = TaskSubmission::create(array_merge($request->all(), ['submitted_by_id' => $submitted_by]));
 
         return redirect()->route('admin.task-submissions.index');
     }

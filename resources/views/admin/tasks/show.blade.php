@@ -8,74 +8,47 @@
         <div class="card-body">
             <div class="form-group">
                 <div class="form-group">
-                    <a class="btn btn-default" href="{{ route('admin.tasks.index') }}">
-                        {{ trans('global.back_to_list') }}
-                    </a>
+                    <button class="btn btn-default pull-right mb-4">
+                        {{ App\Models\Task::STATUS_SELECT[$task->status] ?? '' }}
+                    </button>
                 </div>
                 <table class="table table-bordered table-striped">
-                    <tbody>
-                        <tr>
-                            <th>
-                                {{ trans('cruds.task.fields.id') }}
-                            </th>
-                            <td>
-                                {{ $task->id }}
-                            </td>
-                        </tr>
+                    <thead>
                         <tr>
                             <th>
                                 {{ trans('cruds.task.fields.title') }}
                             </th>
-                            <td>
-                                {{ $task->title }}
-                            </td>
-                        </tr>
-                        <tr>
                             <th>
                                 {{ trans('cruds.task.fields.project') }}
                             </th>
-                            <td>
-                                {{ $task->project->title ?? '' }}
-                            </td>
-                        </tr>
-                        <tr>
                             <th>
                                 {{ trans('cruds.task.fields.team') }}
                             </th>
-                            <td>
-                                {{ $task->team->name ?? '' }}
-                            </td>
-                        </tr>
-                        <tr>
                             <th>
                                 {{ trans('cruds.task.fields.assigned_to') }}
                             </th>
-                            <td>
-                                {{ $task->assigned_to->name ?? '' }}
-                            </td>
-                        </tr>
-                        <tr>
                             <th>
                                 {{ trans('cruds.task.fields.supervisor') }}
                             </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>
+                                {{ $task->title }}
+                            </td>
+                            <td>
+                                {{ $task->project->title ?? '' }}
+                            </td>
+                            <td>
+                                {{ $task->team->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $task->assigned_to->name ?? '' }}
+                            </td>
                             <td>
                                 {{ $task->supervisor->name ?? '' }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                {{ trans('cruds.task.fields.description') }}
-                            </th>
-                            <td>
-                                {{ $task->description }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                {{ trans('cruds.task.fields.status') }}
-                            </th>
-                            <td>
-                                {{ App\Models\Task::STATUS_SELECT[$task->status] ?? '' }}
                             </td>
                         </tr>
                     </tbody>
@@ -88,4 +61,57 @@
             </div>
         </div>
     </div>
-@endsection
+    <div class="card">
+        <div class="card-header">
+            Task Description
+        </div>
+        <div class="card-body">
+            {{ $task->description }}
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            {{ trans('cruds.taskSubmission.title') }}
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-striped">
+                <tbody>
+                    @foreach ($task->taskSubmissions as $taskSubmission)
+                        <tr>
+                            <th>
+                                {{ trans('cruds.taskSubmission.fields.task') }}
+                            </th>
+                            <td>
+                                {{ $taskSubmission->task->title ?? '' }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                {{ trans('cruds.taskSubmission.fields.url') }}
+                            </th>
+                            <td>
+                                {{ $taskSubmission->url }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                {{ trans('cruds.taskSubmission.fields.notes') }}
+                            </th>
+                            <td>
+                                {{ $taskSubmission->notes }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                {{ trans('cruds.taskSubmission.fields.submitted_by') }}
+                            </th>
+                            <td>
+                                {{ $taskSubmission->submitted_by->name ?? '' }}
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+        </div>
+</div @endsection

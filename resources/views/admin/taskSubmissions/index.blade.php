@@ -31,12 +31,11 @@
                             <th>
                                 {{ trans('cruds.taskSubmission.fields.url') }}
                             </th>
-                            <th>
-                                {{ trans('cruds.taskSubmission.fields.notes') }}
-                            </th>
+
                             <th>
                                 {{ trans('cruds.taskSubmission.fields.submitted_by') }}
                             </th>
+
                             <th>
                                 &nbsp;
                             </th>
@@ -57,12 +56,11 @@
                                 <td>
                                     {{ $taskSubmission->url ?? '' }}
                                 </td>
-                                <td>
-                                    {{ $taskSubmission->notes ?? '' }}
-                                </td>
+
                                 <td>
                                     {{ $taskSubmission->submitted_by->name ?? '' }}
                                 </td>
+
                                 <td>
                                     @can('task_submission_show')
                                         <a class="btn btn-xs btn-primary"

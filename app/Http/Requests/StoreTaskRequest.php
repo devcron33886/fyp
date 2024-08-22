@@ -31,10 +31,7 @@ class StoreTaskRequest extends FormRequest
                 'required',
                 'integer',
             ],
-            'supervisor_id' => [
-                'required',
-                'integer',
-            ],
+
             'description' => [
                 'string',
                 'nullable',

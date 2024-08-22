@@ -34,14 +34,14 @@ class TaskController extends Controller
 
         $assigned_tos = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $supervisors = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
-        return view('admin.tasks.create', compact('assigned_tos', 'projects', 'supervisors', 'teams'));
+        return view('admin.tasks.create', compact('assigned_tos', 'projects', 'teams'));
     }
 
     public function store(StoreTaskRequest $request)
     {
-        $task = Task::create($request->all());
+        $supervisor_id = auth()->user()->id;
+
+        $task = Task::create(array_merge($request->all(), ['supervisor_id' => $supervisor_id]));
 
         return redirect()->route('admin.tasks.index');
     }

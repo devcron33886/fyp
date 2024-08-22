@@ -27,6 +27,10 @@ class UpdateTaskSubmissionRequest extends FormRequest
                 'required',
                 'integer',
             ],
+            'team_id' => [
+                'required',
+                'integer',
+            ],
         ];
     }
 }

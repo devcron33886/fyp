@@ -27,10 +27,6 @@ class StoreTeamRequest extends FormRequest
                 'array',
                 'unique:team_user,user_id',
             ],
-            'supervisor_id' => [
-                'required',
-                'integer',
-            ],
         ];
     }
 }

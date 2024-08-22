@@ -45,23 +45,8 @@
                     @endif
                     <span class="help-block">{{ trans('cruds.taskSubmission.fields.notes_helper') }}</span>
                 </div>
-                <div class="form-group">
-                    <label class="required"
-                        for="submitted_by_id">{{ trans('cruds.taskSubmission.fields.submitted_by') }}</label>
-                    <select class="form-control select2 {{ $errors->has('submitted_by') ? 'is-invalid' : '' }}"
-                        name="submitted_by_id" id="submitted_by_id" required>
-                        @foreach ($submitted_bies as $id => $entry)
-                            <option value="{{ $id }}" {{ old('submitted_by_id') == $id ? 'selected' : '' }}>
-                                {{ $entry }}</option>
-                        @endforeach
-                    </select>
-                    @if ($errors->has('submitted_by'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('submitted_by') }}
-                        </div>
-                    @endif
-                    <span class="help-block">{{ trans('cruds.taskSubmission.fields.submitted_by_helper') }}</span>
-                </div>
+
+
                 <div class="form-group">
                     <button class="btn btn-danger" type="submit">
                         {{ trans('global.save') }}

@@ -27,16 +27,15 @@ class ProjectController extends Controller
     {
         abort_if(Gate::denies('project_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $supervisors = User::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
-
         $teams = Team::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.projects.create', compact('supervisors', 'teams'));
+        return view('admin.projects.create', compact('teams'));
     }
 
     public function store(StoreProjectRequest $request)
     {
-        $project = Project::create($request->all());
+        $supervisor = auth()->user()->id;
+        $project = Project::create(array_merge($request->all(), ['supervisor_id' => $supervisor]));
 
         return redirect()->route('admin.projects.index');
     }

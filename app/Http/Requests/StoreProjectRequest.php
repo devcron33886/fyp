@@ -20,10 +20,6 @@ class StoreProjectRequest extends FormRequest
                 'required',
                 'unique:projects',
             ],
-            'supervisor_id' => [
-                'required',
-                'integer',
-            ],
             'team_id' => [
                 'required',
                 'integer',
