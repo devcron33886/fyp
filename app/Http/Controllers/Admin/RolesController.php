@@ -7,7 +7,7 @@ use App\Http\Requests\MassDestroyRoleRequest;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
 use App\Models\Role;
-use App\Permission;
+use App\Models\Permission;
 use Gate;
 use Symfony\Component\HttpFoundation\Response;
 
