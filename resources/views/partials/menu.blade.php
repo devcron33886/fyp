@@ -51,7 +51,8 @@
         @can('task_submission_access')
             <li class="c-sidebar-nav-item">
                 <a href="{{ route('admin.task-submissions.index') }}"
-                    class="c-sidebar-nav-link {{ request()->is('admin/task-submissions') || request()->is('admin/task-submissions/*') ? 'c-active' : '' }}">
+                    class="c-sidebar-nav-link {{ request()->is('admin/task-submissions') || request()->is('admin/task-submissions/*') ? 'c-active' : '' }}"
+                    target="__blank">
                     <i class="fa-fw fas fa-th-list c-sidebar-nav-icon">
 
                     </i>
