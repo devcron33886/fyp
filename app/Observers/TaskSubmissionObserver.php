@@ -10,8 +10,8 @@ class TaskSubmissionObserver
 {
     public function created(TaskSubmission $taskSubmission)
     {
-        $user=$taskSubmission->task->supervisor;
-        Notification::send($user,new NewTaskSubmissionNotification($taskSubmission));
+        $user = $taskSubmission->task->supervisor;
+        Notification::send($user, new NewTaskSubmissionNotification($taskSubmission));
 
     }
 }

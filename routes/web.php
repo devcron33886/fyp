@@ -9,10 +9,16 @@ use App\Http\Controllers\Admin\TaskSubmissionController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\Auth\OtpController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/login');
+
+Route::get('/otp', [OtpController::class, 'index'])->name('otp-login');
+Route::post('/otp-login', [OtpController::class, 'otpLogin'])->name('otp-login.store');
+Route::view('/confirm-otp', 'auth.otp-confirm')->name('otp-confirm');
+Route::post('/otp-verify', [OtpController::class, 'verifyOtp'])->name('otp-verify.store');
 Route::get('/home', function () {
     if (session('status')) {
         return redirect()->route('admin.home')->with('status', session('status'));

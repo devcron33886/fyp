@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\OtpObserver;
 use Carbon\Carbon;
 use DateTimeInterface;
 use Hash;
@@ -35,6 +36,8 @@ class User extends Authenticatable
         'email',
         'email_verified_at',
         'password',
+        'otp',
+        'expires_at',
         'remember_token',
         'created_at',
         'updated_at',
@@ -81,5 +84,10 @@ class User extends Authenticatable
     public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class);
+    }
+    public static function boot()
+    {
+        parent::boot();
+        self::observe(new OtpObserver);
     }
 }
