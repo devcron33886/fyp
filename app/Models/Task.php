@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\TaskObserver;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -68,6 +69,13 @@ class Task extends Model
     public function taskSubmissions(): HasMany
     {
         return $this->hasMany(TaskSubmission::class);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        self::observe(new TaskObserver);
     }
 
     protected static function booted(): void

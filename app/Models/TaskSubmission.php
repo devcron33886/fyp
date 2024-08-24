@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\TaskSubmissionObserver;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -43,5 +44,11 @@ class TaskSubmission extends Model
     public function submitted_by(): BelongsTo
     {
         return $this->belongsTo(User::class, 'submitted_by_id');
+    }
+
+    protected static function booted()
+    {
+        parent::boot();
+        self::observe(new TaskSubmissionObserver);
     }
 }
